@@ -1,0 +1,90 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Django Outlook Mailer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'mailer/styles.css' %}">
+</head>
+<body>
+    <main class="page">
+        <section class="hero">
+            <div>
+                <p class="eyebrow">Portfolio Django Project</p>
+                <h1>Outlook Mail Composer</h1>
+                <p class="muted">
+                    Store recipients in SQL, write an email, preview the signature,
+                    then open a local email compose window with a mailto link.
+                </p>
+            </div>
+            <div class="stats">
+                <span>{{ active_recipient_count }} active</span>
+                <span>{{ recipient_count }} total</span>
+            </div>
+        </section>
+
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <p class="message {{ message.tags }}">{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <section class="grid">
+            <form method="post" class="card form-card">
+                {% csrf_token %}
+
+                <label for="{{ form.subject.id_for_label }}">Subject</label>
+                {{ form.subject }}
+                {{ form.subject.errors }}
+
+                <label for="{{ form.body_text.id_for_label }}">Body</label>
+                {{ form.body_text }}
+                {{ form.body_text.errors }}
+
+                <label for="{{ form.signature_html.id_for_label }}">HTML signature</label>
+                {{ form.signature_html }}
+                <small>{{ form.signature_html.help_text }}</small>
+                {{ form.signature_html.errors }}
+
+                <label class="checkbox">
+                    {{ form.include_inactive }}
+                    <span>{{ form.include_inactive.label }}</span>
+                </label>
+
+                <button type="submit">Save draft and create Outlook link</button>
+            </form>
+
+            <aside class="card preview-card">
+                <h2>Preview</h2>
+
+                {% if draft %}
+                    <p class="subject">{{ draft.subject }}</p>
+
+                    <div class="email-preview">
+                        <p>{{ preview_body|linebreaksbr }}</p>
+                        <div class="signature">
+                            {{ preview_signature_html|safe }}
+                        </div>
+                    </div>
+
+                    <a class="compose-link" href="{{ mailto_url }}">
+                        Open email compose window
+                    </a>
+
+                    <p class="note">
+                        Outlook opens when it is your default email app. Because this version uses mailto,
+                        the compose body is plain text.
+                    </p>
+                {% else %}
+                    <p class="muted">
+                        Fill the form and submit it to see a preview and generate the compose link.
+                    </p>
+                {% endif %}
+            </aside>
+        </section>
+    </main>
+</body>
+</html>

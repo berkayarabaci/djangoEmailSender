@@ -1,0 +1,156 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #f4f6fb;
+    color: #172033;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.page {
+    width: min(1120px, calc(100% - 32px));
+    margin: 40px auto;
+}
+
+.hero {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    align-items: flex-end;
+    margin-bottom: 24px;
+}
+
+.eyebrow {
+    color: #4f46e5;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    font-size: 13px;
+}
+
+h1 {
+    margin: 0 0 12px;
+    font-size: clamp(32px, 5vw, 52px);
+}
+
+h2 {
+    margin-top: 0;
+}
+
+.muted,
+.note,
+small {
+    color: #667085;
+}
+
+.stats {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.stats span {
+    background: #fff;
+    border: 1px solid #e6e8f0;
+    border-radius: 999px;
+    padding: 10px 14px;
+    font-weight: 700;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1.1fr .9fr;
+    gap: 24px;
+}
+
+.card {
+    background: #fff;
+    border: 1px solid #e6e8f0;
+    border-radius: 24px;
+    box-shadow: 0 18px 45px rgba(23, 32, 51, .08);
+    padding: 24px;
+}
+
+label {
+    display: block;
+    font-weight: 700;
+    margin: 18px 0 8px;
+}
+
+input[type="text"],
+textarea {
+    width: 100%;
+    border: 1px solid #d0d5dd;
+    border-radius: 14px;
+    padding: 13px 14px;
+    font: inherit;
+    resize: vertical;
+}
+
+input:focus,
+textarea:focus {
+    outline: 3px solid rgba(79, 70, 229, .16);
+    border-color: #4f46e5;
+}
+
+.checkbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+button,
+.compose-link {
+    display: inline-block;
+    margin-top: 20px;
+    border: 0;
+    border-radius: 14px;
+    background: #4f46e5;
+    color: #fff;
+    font-weight: 700;
+    text-decoration: none;
+    padding: 13px 18px;
+    cursor: pointer;
+}
+
+.email-preview {
+    border: 1px solid #e6e8f0;
+    border-radius: 18px;
+    padding: 18px;
+    background: #fbfcff;
+}
+
+.subject {
+    font-weight: 800;
+    font-size: 20px;
+}
+
+.signature {
+    border-top: 1px solid #e6e8f0;
+    margin-top: 18px;
+    padding-top: 18px;
+}
+
+.message {
+    padding: 12px 14px;
+    border-radius: 14px;
+    background: #eef4ff;
+}
+
+.message.success {
+    background: #ecfdf3;
+}
+
+.message.error {
+    background: #fef3f2;
+}
+
+@media (max-width: 850px) {
+    .hero,
+    .grid {
+        grid-template-columns: 1fr;
+        display: grid;
+    }
+}
