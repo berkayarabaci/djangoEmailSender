@@ -1,1 +1,8 @@
-Django>=5.2,<6.0
+asgiref==3.11.1
+Django==5.2.14
+mssql-django==1.7.1
+pyodbc==5.3.0
+pytz==2026.2
+pywin32==311
+sqlparse==0.5.5
+tzdata==2026.2

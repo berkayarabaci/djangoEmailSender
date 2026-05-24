@@ -1,7 +1,37 @@
+# Virtual environment
 .venv/
+venv/
+env/
+
+# Python cache
 __pycache__/
 *.py[cod]
+*$py.class
+
+# Django/local database
 db.sqlite3
+
+# Environment variables / secrets
 .env
-.DS_Store
+.env.local
+
+# Static build output
 staticfiles/
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# VS Code
+.vscode/
+
+# PyCharm
+.idea/
+
+# Test/cache files
+.pytest_cache/
+.coverage
+htmlcov/

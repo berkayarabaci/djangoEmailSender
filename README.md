@@ -1,118 +1,70 @@
-# Django Outlook Mailer MVP
+# Django Outlook Mailer
 
-A small portfolio project built with Django.
+A portfolio Django project for managing email recipients, reusable email templates, HTML signatures, and opening pre-filled Outlook desktop email drafts.
 
-The app stores email recipients in a SQL database table, lets a user write an email subject/body/signature, previews the message, and opens the local/default email client through a `mailto:` compose link. SMTP/real sending can be added in version 2.
+The app stores recipients, email templates, and signature users in a SQL database. A user can write an email, choose a saved signature user, load an HTML signature from a URL or manual input, preview the message, and open a pre-filled Outlook desktop draft with BCC recipients and HTML signature.
 
 ## Features
 
-- Recipient table in SQLite through Django ORM
-- Admin panel for managing recipients
-- Email composer form
-- Plain-text body input
-- HTML signature input and preview
-- `mailto:` compose link with recipients in BCC
-- Draft history saved to database
-- Seed command for demo recipients
+- Django-based email composer
+- Microsoft SQL Server database support
+- Recipient management from frontend
+  - Add recipients
+  - Edit recipients
+  - Delete recipients
+  - Delete selected recipients
+- Email template management
+  - Save subject, body, signature settings, and inactive-recipient option
+  - Reuse saved templates
+  - Delete templates
+- Web users table for signature variables
+  - `{{DisplayName}}`
+  - `{{JobTitle}}`
+  - `{{Department}}`
+  - `{{Tel1}}`
+  - `{{Tel2}}`
+- HTML signature support
+  - Manual HTML signature input
+  - Load signature from URL
+- Outlook desktop integration through Windows COM automation
+- Opens Outlook draft with:
+  - BCC recipients
+  - Subject
+  - Body
+  - HTML signature
+- Django admin support
+- Portfolio-friendly database table pages
 
-## Important note about Outlook and HTML signatures
+## Important Notes
 
-This MVP uses a `mailto:` link. It opens Outlook only when Outlook is configured as the default mail client on the user's computer. `mailto:` bodies are plain text in practice, so the HTML signature is shown in the web preview and converted to text for the compose window.
+This project currently uses local Outlook desktop automation through `pywin32`.
 
-In version 2, SMTP or Microsoft Graph can send real HTML emails.
+That means:
+
+- It works on Windows.
+- Microsoft Outlook desktop must be installed.
+- The Django app must run on the same computer as Outlook.
+- This is not suitable for Linux hosting or cloud deployment in its current version.
+
+For production or cloud usage, Microsoft Graph API is the recommended next step.
 
 ## Tech Stack
 
-- Python 3.11+
-- Django 5.2 LTS
-- SQLite for local development
+- Python 3.12
+- Django 5.2
+- Microsoft SQL Server
+- mssql-django
+- pyodbc
+- pywin32
+- HTML/CSS
+- Outlook Desktop COM Automation
 
-## Setup
+## Database Tables
 
-```bash
-python -m venv .venv
-```
-
-Windows:
-
-```bash
-.venv\Scripts\activate
-```
-
-macOS/Linux:
-
-```bash
-source .venv/bin/activate
-```
-
-Install dependencies:
-
-```bash
-pip install -r requirements.txt
-```
-
-Run migrations:
-
-```bash
-python manage.py migrate
-```
-
-Create demo recipients:
-
-```bash
-python manage.py seed_recipients
-```
-
-Create an admin user:
-
-```bash
-python manage.py createsuperuser
-```
-
-Run the server:
-
-```bash
-python manage.py runserver
-```
-
-Open:
+Main tables used by the app:
 
 ```text
-http://127.0.0.1:8000/
-```
-
-Admin:
-
-```text
-http://127.0.0.1:8000/admin/
-```
-
-## Version 2 Ideas
-
-- SMTP sending with `django.core.mail.EmailMultiAlternatives`
-- Microsoft Graph API integration for Outlook/Microsoft 365
-- Email templates
-- CSV recipient import
-- Recipient groups
-- Unsubscribe/status fields
-- Send logs and delivery tracking
-- Celery background jobs for large batches
-
-## Project Structure
-
-```text
-django_outlook_mailer/
-├── config/
-├── mailer/
-│   ├── management/commands/seed_recipients.py
-│   ├── templates/mailer/
-│   ├── static/mailer/
-│   ├── admin.py
-│   ├── forms.py
-│   ├── models.py
-│   ├── urls.py
-│   └── views.py
-├── manage.py
-├── requirements.txt
-└── README.md
+dbo.mailer_recipient
+dbo.mailer_emaildraft
+dbo.web_users
 ```

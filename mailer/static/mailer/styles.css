@@ -147,6 +147,160 @@ button,
     background: #fef3f2;
 }
 
+.recipient-card {
+    margin-top: 32px;
+}
+
+.recipient-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.recipient-header h2 {
+    margin: 0;
+}
+
+.recipient-header p {
+    margin: 6px 0 0;
+    color: #52607a;
+}
+
+.recipient-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 18px;
+}
+
+.recipient-table th,
+.recipient-table td {
+    padding: 12px 14px;
+    border-bottom: 1px solid #e5e7eb;
+    text-align: left;
+}
+
+.recipient-table th {
+    background: #f8fafc;
+    font-size: 14px;
+}
+
+.recipient-table td {
+    font-size: 14px;
+}
+
+.button.secondary {
+    background: #0f172a;
+    color: white;
+    text-decoration: none;
+}
+
+.button.danger {
+    background: #dc2626;
+    color: white;
+}
+
+.table-card {
+    padding: 0;
+    overflow: hidden;
+}
+
+.table-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 20px;
+    border-bottom: 1px solid #d8dee9;
+    background: #f8fafc;
+}
+
+.database-table-wrap {
+    overflow-x: auto;
+}
+
+.database-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    background: white;
+}
+
+.database-table th,
+.database-table td {
+    border-right: 1px solid #d8dee9;
+    border-bottom: 1px solid #d8dee9;
+    padding: 9px 10px;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.database-table th {
+    background: #eef2f7;
+    font-weight: 700;
+    color: #111827;
+}
+
+.database-table tbody tr:nth-child(even) {
+    background: #f8fafc;
+}
+
+.database-table tbody tr:hover {
+    background: #e0f2fe;
+}
+
+.database-table .small-col {
+    width: 44px;
+    text-align: center;
+}
+
+.database-table td:first-child,
+.database-table th:first-child {
+    text-align: center;
+}
+
+.badge {
+    display: inline-block;
+    min-width: 52px;
+    padding: 4px 8px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.badge.active {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.badge.inactive {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+}
+
+.actions a {
+    color: #4f46e5;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.empty-row {
+    text-align: center;
+    color: #64748b;
+    padding: 24px;
+}
+
+.message.info {
+    background: #e0f2fe;
+    border-color: #bae6fd;
+}
+
 @media (max-width: 850px) {
     .hero,
     .grid {

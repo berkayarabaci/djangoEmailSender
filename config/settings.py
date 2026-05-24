@@ -47,8 +47,15 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "mssql",
+        "NAME": "gurserv",
+        "USER": "berkay",
+        "PASSWORD": "800107",
+        "HOST": r"DESKTOP-R6IKK0V\SQLEXPRESS",
+        "OPTIONS": {
+            "driver": "ODBC Driver 17 for SQL Server",
+            "extra_params": "TrustServerCertificate=yes",
+        },
     }
 }
 

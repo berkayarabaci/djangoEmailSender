@@ -1,0 +1,126 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Email Templates</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'mailer/styles.css' %}">
+</head>
+<body>
+    <main class="page">
+        <section class="hero">
+            <div>
+                <p class="eyebrow">Template Management</p>
+                <h1>Email Templates</h1>
+                <p class="muted">
+                    Saved subjects, body text, signatures, and recipient options.
+                </p>
+            </div>
+
+            <div class="stats">
+                <a class="button secondary" href="{% url 'compose_email' %}">
+                    Back to Composer
+                </a>
+            </div>
+        </section>
+
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <p class="message {{ message.tags }}">{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <section class="card table-card">
+            <form method="post" action="{% url 'draft_delete_selected' %}">
+                {% csrf_token %}
+
+                <div class="table-toolbar">
+                    <div>
+                        <strong>{{ drafts|length }}</strong> template(s)
+                    </div>
+
+                    <button class="button danger" type="submit">
+                        Delete Selected
+                    </button>
+                </div>
+
+                <div class="database-table-wrap">
+                    <table class="database-table">
+                        <thead>
+                            <tr>
+                                <th class="small-col">
+                                    <input type="checkbox" id="select-all">
+                                </th>
+                                <th>Field</th>
+                                <th>Template Name</th>
+                                <th>Subject</th>
+                                <th>Body</th>
+                                <th>Signature</th>
+                                <th>Include Inactive</th>
+                                <th>Recipient Count</th>
+                                <th>Created At</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {% for draft in drafts %}
+                                <tr>
+                                    <td>
+                                        <input
+                                            type="checkbox"
+                                            name="selected_drafts"
+                                            value="{{ draft.id }}"
+                                            class="row-checkbox"
+                                        >
+                                    </td>
+                                    <td>{{ forloop.counter }}</td>
+                                    <td>{{ draft.template_name|default:"Untitled template" }}</td>
+                                    <td>{{ draft.subject }}</td>
+                                    <td>{{ draft.body_text|truncatechars:60 }}</td>
+                                    <td>{{ draft.signature_html|striptags|truncatechars:50 }}</td>
+                                    <td>
+                                        {% if draft.include_inactive %}
+                                            <span class="badge active">True</span>
+                                        {% else %}
+                                            <span class="badge inactive">False</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ draft.recipient_count }}</td>
+                                    <td>{{ draft.created_at|date:"Y-m-d H:i" }}</td>
+                                    <td class="actions">
+                                        <a href="{% url 'compose_email' %}?template={{ draft.id }}">Use</a>
+                                        <a href="{% url 'draft_delete' draft.id %}">Delete</a>
+                                    </td>
+                                </tr>
+                            {% empty %}
+                                <tr>
+                                    <td colspan="10" class="empty-row">
+                                        No templates saved yet.
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <script>
+        const selectAll = document.getElementById("select-all");
+        const checkboxes = document.querySelectorAll(".row-checkbox");
+
+        if (selectAll) {
+            selectAll.addEventListener("change", function () {
+                checkboxes.forEach(function (checkbox) {
+                    checkbox.checked = selectAll.checked;
+                });
+            });
+        }
+    </script>
+</body>
+</html>

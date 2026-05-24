@@ -1,6 +1,5 @@
 from django.contrib import admin
-
-from .models import EmailDraft, Recipient
+from .models import EmailDraft, Recipient, WebUser
 
 
 @admin.register(Recipient)
@@ -15,3 +14,18 @@ class EmailDraftAdmin(admin.ModelAdmin):
     list_display = ("subject", "recipient_count", "created_at")
     search_fields = ("subject", "body_text")
     readonly_fields = ("created_at",)
+
+@admin.register(WebUser)
+class WebUserAdmin(admin.ModelAdmin):
+    list_display = (
+        "display_name",
+        "job_title",
+        "department",
+        "tel1",
+        "tel2",
+        "email",
+        "status",
+        "created_at",
+    )
+    list_filter = ("status", "department")
+    search_fields = ("name", "surname", "job_title", "department", "email")

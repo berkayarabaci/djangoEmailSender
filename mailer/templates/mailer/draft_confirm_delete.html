@@ -1,0 +1,28 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Delete Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'mailer/styles.css' %}">
+</head>
+<body>
+    <main class="page">
+        <section class="card form-card">
+            <h1>Delete Template</h1>
+
+            <p>
+                Are you sure you want to delete
+                <strong>{{ draft.template_name|default:draft.subject }}</strong>?
+            </p>
+
+            <form method="post">
+                {% csrf_token %}
+                <button class="button danger" type="submit">Yes, delete</button>
+                <a class="button secondary" href="{% url 'draft_list' %}">Cancel</a>
+            </form>
+        </section>
+    </main>
+</body>
+</html>
